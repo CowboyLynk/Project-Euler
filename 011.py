@@ -1,4 +1,4 @@
-with open("11_grid.txt", "r") as f:
+with open("011_grid.txt", "r") as f:
 	grid = [[int(num) for num in line.strip().split(" ")] for line in f.readlines()]
 
 
