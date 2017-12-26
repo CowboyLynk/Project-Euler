@@ -1,14 +1,14 @@
-def get_perms(L, upto=[]):
-	if len(L) == 1:
-		yield upto + L
-	for i in range(len(L)):
-		yield from get_perms(L[:i] + L[i+1:], upto + [L[i]])
+from math import factorial
 
-L = [x for x in range(10)]
 
-num = 0
-for i in get_perms(L):
-	num += 1
-	if num == 1000000:
-		print(i)
-		break
+def nth_perm(pos, L):
+    pos -= 1
+    perm = []
+    for i in reversed(range(len(L))):
+        c = pos//factorial(i)
+        perm.append(L[c])
+        L.remove(L[c])
+        pos -= c*factorial(i)
+    return perm
+
+print("".join([str(x) for x in nth_perm(1000000, [x for x in range(10)])]))
