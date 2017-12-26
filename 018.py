@@ -25,13 +25,17 @@ for i in range(len(triangle)):
 
 
 initial = triangle[0][0]
-initial.distance = 0
+initial.distance = initial.value
 
 
 def update_distance(node):
 	for child in node.children:
-		if child.distance < child.distance + child.value:
-			child.distance = child.distance + child.value
-	# for each child update the distance
-	# call recursively on each child
-	pass
+		if child.distance < node.distance + child.value:
+			child.distance = node.distance + child.value
+		update_distance(child)
+
+update_distance(initial)
+
+distances = [[node.distance for node in row] for row in triangle]
+
+print(max(distances[-1]))
